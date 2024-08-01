@@ -1,0 +1,21 @@
+<h2>Posts</h2>
+
+<div>
+  <h3>Ajouter un Post</h3>
+  <input [(ngModel)]="newPost.title" placeholder="Title">
+  <textarea [(ngModel)]="newPost.content" placeholder="Content"></textarea>
+  <button (click)="addPost()">Ajouter</button>
+</div>
+
+<div>
+  <h3>Liste des Posts</h3>
+  <ul>
+    <li *ngFor="let post of posts">
+      <h4>{{ post.title }}</h4>
+      <p>{{ post.content }}</p>
+      <button (click)="deletePost(post.id)">Supprimer</button>
+      <!-- <button (click)="updatePost(post)">Modifier</button> -->
+      <!-- Ajouter des fonctionnalités de mise à jour si nécessaire -->
+    </li>
+  </ul>
+</div>
