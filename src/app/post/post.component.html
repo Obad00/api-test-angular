@@ -1,12 +1,16 @@
-<h2>Posts</h2>
 
+<!-- Formulaire réactif pour ajouter ou modifier un post -->
 <div>
-  <h3>Ajouter un Post</h3>
-  <input [(ngModel)]="newPost.title" placeholder="Title">
-  <textarea [(ngModel)]="newPost.content" placeholder="Content"></textarea>
-  <button (click)="addPost()">Ajouter</button>
+  <h3>{{ editingPost ? 'Modifier un Post' : 'Ajouter un Post' }}</h3>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" placeholder="Title">
+    <textarea formControlName="content" placeholder="Content"></textarea>
+    <button type="submit">{{ editingPost ? 'Enregistrer les modifications' : 'Ajouter' }}</button>
+    <button *ngIf="editingPost" type="button" (click)="cancelEdit()">Annuler</button>
+  </form>
 </div>
 
+<!-- Liste des posts -->
 <div>
   <h3>Liste des Posts</h3>
   <ul>
@@ -14,8 +18,7 @@
       <h4>{{ post.title }}</h4>
       <p>{{ post.content }}</p>
       <button (click)="deletePost(post.id)">Supprimer</button>
-      <!-- <button (click)="updatePost(post)">Modifier</button> -->
-      <!-- Ajouter des fonctionnalités de mise à jour si nécessaire -->
+      <button (click)="editPost(post)">Modifier</button>
     </li>
   </ul>
 </div>
